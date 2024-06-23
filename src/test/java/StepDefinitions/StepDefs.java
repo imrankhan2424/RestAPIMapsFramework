@@ -1,5 +1,6 @@
 package StepDefinitions;
 
+import Pojo.AddPlace;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -9,6 +10,7 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.junit.Assert;
+import resources.APIResources;
 import resources.PayLoad;
 import resources.Utils;
 
@@ -28,7 +30,9 @@ public class StepDefs extends Utils {
 
     @When("user call {string} api using {string} http request")
     public void userCallApiUsingHttpRequest(String resource, String requestType) {
-        response=res.when().post("/maps/api/place/add/json").then().extract().response();
+        APIResources apiResources=APIResources.valueOf(resource);
+        System.out.println(apiResources.getPath());
+        response=res.when().post(apiResources.getPath()).then().extract().response();
     }
 
     @Then("verify response api status code is {int}")
