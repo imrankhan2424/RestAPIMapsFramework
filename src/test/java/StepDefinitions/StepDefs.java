@@ -32,7 +32,10 @@ public class StepDefs extends Utils {
     public void userCallApiUsingHttpRequest(String resource, String requestType) {
         APIResources apiResources=APIResources.valueOf(resource);
         System.out.println(apiResources.getPath());
-        response=res.when().post(apiResources.getPath()).then().extract().response();
+        if(requestType.equalsIgnoreCase("POST"))
+            response=res.when().post(apiResources.getPath()).then().extract().response();
+        else
+            response=res.when().get(apiResources.getPath()).then().extract().response();
     }
 
     @Then("verify response api status code is {int}")
