@@ -20,14 +20,17 @@ public class Utils {
     }
 
     public RequestSpecification Requestspecification() throws IOException {
-        PrintStream stream=new PrintStream(new FileOutputStream("logs.txt"));
-         req=new RequestSpecBuilder()
-                .setBaseUri(globalValue("baseURI"))
-                .setContentType(ContentType.JSON)
-                .addQueryParam("key","qaclick123")
-                 .addFilter(RequestLoggingFilter.logRequestTo(stream))
-                 .addFilter(ResponseLoggingFilter.logResponseTo(stream))
-                .build();
+
+        if(req==null){
+            PrintStream stream=new PrintStream(new FileOutputStream("logs.txt"));
+            req=new RequestSpecBuilder()
+                    .setBaseUri(globalValue("baseURI"))
+                    .setContentType(ContentType.JSON)
+                    .addQueryParam("key","qaclick123")
+                    .addFilter(RequestLoggingFilter.logRequestTo(stream))
+                    .addFilter(ResponseLoggingFilter.logResponseTo(stream))
+                    .build();
+        }
         return req;
     }
 
@@ -36,5 +39,11 @@ public class Utils {
         FileInputStream fis=new FileInputStream("src/test/java/resources/global.properties");
         prop.load(fis);
         return prop.getProperty(key);
+    }
+
+    public String getAPIResource(String resource){
+        APIResources apiResources=APIResources.valueOf(resource);
+        System.out.println(apiResources.getPath());
+        return apiResources.getPath();
     }
 }

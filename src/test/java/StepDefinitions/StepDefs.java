@@ -26,12 +26,10 @@ public class StepDefs extends Utils {
 
     @When("user call {string} api using {string} http request")
     public void userCallApiUsingHttpRequest(String resource, String requestType) {
-        APIResources apiResources=APIResources.valueOf(resource);
-        System.out.println(apiResources.getPath());
         if(requestType.equalsIgnoreCase("POST"))
-            response=res.when().post(apiResources.getPath()).then().extract().response();
+            response=res.when().post(getAPIResource(resource)).then().extract().response();
         else
-            response=res.when().get(apiResources.getPath()).then().extract().response();
+            response=res.when().get(getAPIResource(resource)).then().extract().response();
     }
 
     @Then("verify response api status code is {int}")
@@ -44,9 +42,20 @@ public class StepDefs extends Utils {
         Assert.assertEquals(getJsonValue(response,key),expectedResponseValue);
     }
 
-    @Then("verify place_Id created maps to {string} using {string}")
-    public void verifyPlace_IdCreatedMapsToUsing(String arg0, String arg1) {
+//    @Then("verify place_Id created maps to {string} using {string}")
+//    public void verifyPlace_IdCreatedMapsToUsing(String expectedName, String resource) throws IOException {
+//        String place_id=getJsonValue(response,"place_id");
+//        System.out.println(place_id);
+//        response=given().spec(Requestspecification()).queryParam("place_id",getJsonValue(response,"place_id")).when().get(getAPIResource(resource)).then().extract().response();
+//        Assert.assertEquals(getJsonValue(response,"name"),expectedName);
+//    }
+
+
+    @Then("verify {string} created maps to {string} using {string}")
+    public void verifyCreatedMapsToUsing(String jsonValue, String expectedName, String resource) throws IOException {
+        res=given().spec(Requestspecification()).
+                queryParam(jsonValue,getJsonValue(response,jsonValue));
+        userCallApiUsingHttpRequest(resource,"GET");
+        Assert.assertEquals(getJsonValue(response,"name"),expectedName);
     }
-
-
 }
