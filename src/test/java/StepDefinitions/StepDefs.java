@@ -13,6 +13,7 @@ import resources.PayLoad;
 import resources.Utils;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import static io.restassured.RestAssured.given;
 
@@ -21,7 +22,7 @@ public class StepDefs extends Utils {
     Response response;
 
     @Given("Add Place Payload with {string} {string} {string}")
-    public void addPlacePayloadWith(String name, String language, String address) throws FileNotFoundException {
+    public void addPlacePayloadWith(String name, String language, String address) throws IOException {
         res=given().spec(Requestspecification()).body(PayLoad.AddPlacePayload(name,language,address));
     }
 

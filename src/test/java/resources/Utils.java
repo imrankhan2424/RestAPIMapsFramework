@@ -8,9 +8,8 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
+import java.io.*;
+import java.util.Properties;
 
 public class Utils {
     RequestSpecification req;
@@ -20,15 +19,22 @@ public class Utils {
         return js.get(key).toString();
     }
 
-    public RequestSpecification Requestspecification() throws FileNotFoundException {
+    public RequestSpecification Requestspecification() throws IOException {
         PrintStream stream=new PrintStream(new FileOutputStream("logs.txt"));
          req=new RequestSpecBuilder()
-                .setBaseUri("https://rahulshettyacademy.com")
+                .setBaseUri(globalValue("baseURI"))
                 .setContentType(ContentType.JSON)
                 .addQueryParam("key","qaclick123")
                  .addFilter(RequestLoggingFilter.logRequestTo(stream))
                  .addFilter(ResponseLoggingFilter.logResponseTo(stream))
                 .build();
         return req;
+    }
+
+    public static String globalValue(String key) throws IOException {
+        Properties prop=new Properties();
+        FileInputStream fis=new FileInputStream("src/test/java/resources/global.properties");
+        prop.load(fis);
+        return prop.getProperty(key);
     }
 }
