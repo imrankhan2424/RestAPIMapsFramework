@@ -1,6 +1,7 @@
 package resources;
 
 import Pojo.AddPlace;
+import Pojo.Delete;
 import Pojo.Location;
 
 import java.util.ArrayList;
@@ -31,5 +32,11 @@ public class PayLoad {
         addPlace.setLocation(location);
 
         return addPlace;
+    }
+
+    public static Delete DeletePayload(String place_id){
+        Delete delete=new Delete();
+        delete.setPlace_id(place_id);
+        return delete;
     }
 }

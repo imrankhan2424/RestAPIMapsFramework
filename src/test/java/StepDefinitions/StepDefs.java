@@ -7,7 +7,6 @@ import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.junit.Assert;
-import resources.APIResources;
 import resources.PayLoad;
 import resources.Utils;
 
@@ -18,6 +17,7 @@ import static io.restassured.RestAssured.given;
 public class StepDefs extends Utils {
     RequestSpecification res;
     Response response;
+    static String place_id;
 
     @Given("Add Place Payload with {string} {string} {string}")
     public void addPlacePayloadWith(String name, String language, String address) throws IOException {
@@ -42,20 +42,17 @@ public class StepDefs extends Utils {
         Assert.assertEquals(getJsonValue(response,key),expectedResponseValue);
     }
 
-//    @Then("verify place_Id created maps to {string} using {string}")
-//    public void verifyPlace_IdCreatedMapsToUsing(String expectedName, String resource) throws IOException {
-//        String place_id=getJsonValue(response,"place_id");
-//        System.out.println(place_id);
-//        response=given().spec(Requestspecification()).queryParam("place_id",getJsonValue(response,"place_id")).when().get(getAPIResource(resource)).then().extract().response();
-//        Assert.assertEquals(getJsonValue(response,"name"),expectedName);
-//    }
-
-
     @Then("verify {string} created maps to {string} using {string}")
-    public void verifyCreatedMapsToUsing(String jsonValue, String expectedName, String resource) throws IOException {
+    public void verifyCreatedMapsToUsing(String jsonNode, String expectedName, String resource) throws IOException {
+        place_id=getJsonValue(response,jsonNode);
         res=given().spec(Requestspecification()).
-                queryParam(jsonValue,getJsonValue(response,jsonValue));
+                queryParam(jsonNode,place_id);
         userCallApiUsingHttpRequest(resource,"GET");
         Assert.assertEquals(getJsonValue(response,"name"),expectedName);
+    }
+
+    @Given("Delete Place Payload")
+    public void deletePlacePayload() throws IOException {
+        res=given().spec(Requestspecification()).body(PayLoad.DeletePayload(place_id));
     }
 }

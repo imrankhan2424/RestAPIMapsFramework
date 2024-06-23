@@ -1,5 +1,5 @@
 Request method:	POST
-Request URI:	https://rahulshettyacademy.com/maps/api/place/add/json?key=qaclick123
+Request URI:	https://rahulshettyacademy.com/maps/api/place/delete/json?key=qaclick123
 Proxy:			<none>
 Request params:	<none>
 Query params:	key=qaclick123
@@ -11,75 +11,20 @@ Cookies:		<none>
 Multiparts:		<none>
 Body:
 {
-    "accuracy": 50,
-    "name": "Imran",
-    "phone_number": "+91-9876543210",
-    "address": "Jharkhand",
-    "website": "https://google.co.in",
-    "language": "English",
-    "types": [
-        "Shoe Park",
-        "Shop"
-    ],
-    "location": {
-        "lat": -38.383494,
-        "lng": 35.383494
-    }
+    "place_id": "996d9ec6cc6a6992e90570c06d7391aa"
 }
 HTTP/1.1 200 OK
-Date: Sun, 23 Jun 2024 20:35:20 GMT
+Date: Sun, 23 Jun 2024 22:07:13 GMT
 Server: Apache/2.4.52 (Ubuntu)
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Methods: POST
 Access-Control-Max-Age: 3600
 Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With
-Content-Length: 194
+Content-Length: 15
 Keep-Alive: timeout=5, max=100
 Connection: Keep-Alive
 Content-Type: application/json;charset=UTF-8
 
 {
-    "status": "OK",
-    "place_id": "a2ae7d796e2a2ed7379240819a026fa8",
-    "scope": "APP",
-    "reference": "32dc8a18f94f66a35054fa126920499432dc8a18f94f66a35054fa1269204994",
-    "id": "32dc8a18f94f66a35054fa1269204994"
-}
-Request method:	GET
-Request URI:	https://rahulshettyacademy.com/maps/api/place/get/json?key=qaclick123&place_id=a2ae7d796e2a2ed7379240819a026fa8
-Proxy:			<none>
-Request params:	<none>
-Query params:	key=qaclick123
-				place_id=a2ae7d796e2a2ed7379240819a026fa8
-Form params:	<none>
-Path params:	<none>
-Headers:		Accept=*/*
-				Content-Type=application/json
-Cookies:		<none>
-Multiparts:		<none>
-Body:			<none>
-HTTP/1.1 200 OK
-Date: Sun, 23 Jun 2024 20:35:22 GMT
-Server: Apache/2.4.52 (Ubuntu)
-Access-Control-Allow-Origin: *
-Access-Control-Allow-Methods: POST
-Access-Control-Max-Age: 3600
-Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With
-Content-Length: 228
-Keep-Alive: timeout=5, max=100
-Connection: Keep-Alive
-Content-Type: application/json;charset=UTF-8
-
-{
-    "location": {
-        "latitude": "-38.383494",
-        "longitude": "35.383494"
-    },
-    "accuracy": "50",
-    "name": "Imran",
-    "phone_number": "+91-9876543210",
-    "address": "Jharkhand",
-    "types": "Shoe Park,Shop",
-    "website": "https://google.co.in",
-    "language": "English"
+    "status": "OK"
 }
