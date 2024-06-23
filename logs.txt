@@ -11,10 +11,10 @@ Cookies:		<none>
 Multiparts:		<none>
 Body:
 {
-    "place_id": "c9201a812e47f2f7cf9a6d5d02852c87"
+    "place_id": "74c023362a5c0cbf544ef01e9f33e0ed"
 }
 HTTP/1.1 200 OK
-Date: Sun, 23 Jun 2024 22:51:52 GMT
+Date: Sun, 23 Jun 2024 22:58:42 GMT
 Server: Apache/2.4.52 (Ubuntu)
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Methods: POST
